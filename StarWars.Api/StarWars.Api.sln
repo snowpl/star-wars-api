@@ -3,7 +3,40 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api", "StarWars.Api.csproj", "{03BB11EF-1D7D-471A-A026-1300E9912E9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarWars.Api", "StarWars.Api.csproj", "{03BB11EF-1D7D-471A-A026-1300E9912E9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Episodes", "..\StarWars.Api.Episodes\StarWars.Api.Episodes.csproj", "{4D45AD4A-D61E-43EE-98BC-EEA695CA8C22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Episodes.Contracts", "..\StarWars.Api.Episodes.Contracts\StarWars.Api.Episodes.Contracts.csproj", "{74E1B87B-C4F0-4B43-8378-D863D29B46C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Episodes", "Episodes", "{93C3F343-3ECF-444B-966A-956F462185C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Characters", "Characters", "{B7800509-C11E-40BA-83FA-2C09B6F5602B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Characters", "..\StarWars.Api.Characters\StarWars.Api.Characters.csproj", "{C07247C3-420D-4595-B9B9-33764183750C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B0448B85-0A5A-48E2-98EE-9E8A037D6DF0} = {B0448B85-0A5A-48E2-98EE-9E8A037D6DF0}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Characters.Contracts", "..\StarWars.Api.Characters.Contracts\StarWars.Api.Characters.Contracts.csproj", "{A14C0FD0-D482-41EB-BC11-ED547405872C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Infrastructure", "..\StarWars.Api.Infrastructure\StarWars.Api.Infrastructure.csproj", "{B0448B85-0A5A-48E2-98EE-9E8A037D6DF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Characters.Tests", "..\StarWars.Api.Characters.Tests\StarWars.Api.Characters.Tests.csproj", "{A6F6F20A-3B1A-4E10-8FB9-73CEF38E914A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Episodes.Tests", "..\StarWars.Api.Episodes.Tests\StarWars.Api.Episodes.Tests.csproj", "{3A2CBBED-8945-443C-AFAE-20FDF0A0A34F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Infrastructure.Tests", "..\StarWars.Api.Infrastructure.Tests\StarWars.Api.Infrastructure.Tests.csproj", "{CDA2F6E6-4AE2-4340-AC17-ADEC1955A74B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.SharedKernel", "..\StarWars.Api.SharedKernel\StarWars.Api.SharedKernel.csproj", "{CA6BFAD6-50D2-4FF1-9B86-D22F9F210938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.SharedKernel.Contracts", "..\StarWars.Api.SharedKernel.Contracts\StarWars.Api.SharedKernel.Contracts.csproj", "{72C7FE99-1EBE-47A7-842B-C6EA1A3887DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Infrastructure.Storage", "..\StarWars.Api.Infrastructure.Storage\StarWars.Api.Infrastructure.Storage.csproj", "{5ACFAF7C-E459-42CC-AD3D-84978D353CA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Characters.Storage", "..\StarWars.Api.Characters.Storage\StarWars.Api.Characters.Storage.csproj", "{DD52DBA4-C1F8-4E60-AFA9-53FEB2E18A95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Episodes.Storage", "..\StarWars.Api.Episodes.Storage\StarWars.Api.Episodes.Storage.csproj", "{E34210B3-393F-4C9B-A316-EAC32D920B6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +48,71 @@ Global
 		{03BB11EF-1D7D-471A-A026-1300E9912E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03BB11EF-1D7D-471A-A026-1300E9912E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03BB11EF-1D7D-471A-A026-1300E9912E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D45AD4A-D61E-43EE-98BC-EEA695CA8C22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D45AD4A-D61E-43EE-98BC-EEA695CA8C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D45AD4A-D61E-43EE-98BC-EEA695CA8C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D45AD4A-D61E-43EE-98BC-EEA695CA8C22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74E1B87B-C4F0-4B43-8378-D863D29B46C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74E1B87B-C4F0-4B43-8378-D863D29B46C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74E1B87B-C4F0-4B43-8378-D863D29B46C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74E1B87B-C4F0-4B43-8378-D863D29B46C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C07247C3-420D-4595-B9B9-33764183750C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C07247C3-420D-4595-B9B9-33764183750C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C07247C3-420D-4595-B9B9-33764183750C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C07247C3-420D-4595-B9B9-33764183750C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14C0FD0-D482-41EB-BC11-ED547405872C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14C0FD0-D482-41EB-BC11-ED547405872C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14C0FD0-D482-41EB-BC11-ED547405872C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14C0FD0-D482-41EB-BC11-ED547405872C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0448B85-0A5A-48E2-98EE-9E8A037D6DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0448B85-0A5A-48E2-98EE-9E8A037D6DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0448B85-0A5A-48E2-98EE-9E8A037D6DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0448B85-0A5A-48E2-98EE-9E8A037D6DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F6F20A-3B1A-4E10-8FB9-73CEF38E914A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F6F20A-3B1A-4E10-8FB9-73CEF38E914A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F6F20A-3B1A-4E10-8FB9-73CEF38E914A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F6F20A-3B1A-4E10-8FB9-73CEF38E914A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2CBBED-8945-443C-AFAE-20FDF0A0A34F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2CBBED-8945-443C-AFAE-20FDF0A0A34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2CBBED-8945-443C-AFAE-20FDF0A0A34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2CBBED-8945-443C-AFAE-20FDF0A0A34F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDA2F6E6-4AE2-4340-AC17-ADEC1955A74B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDA2F6E6-4AE2-4340-AC17-ADEC1955A74B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDA2F6E6-4AE2-4340-AC17-ADEC1955A74B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDA2F6E6-4AE2-4340-AC17-ADEC1955A74B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA6BFAD6-50D2-4FF1-9B86-D22F9F210938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA6BFAD6-50D2-4FF1-9B86-D22F9F210938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA6BFAD6-50D2-4FF1-9B86-D22F9F210938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA6BFAD6-50D2-4FF1-9B86-D22F9F210938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C7FE99-1EBE-47A7-842B-C6EA1A3887DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C7FE99-1EBE-47A7-842B-C6EA1A3887DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C7FE99-1EBE-47A7-842B-C6EA1A3887DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C7FE99-1EBE-47A7-842B-C6EA1A3887DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ACFAF7C-E459-42CC-AD3D-84978D353CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ACFAF7C-E459-42CC-AD3D-84978D353CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ACFAF7C-E459-42CC-AD3D-84978D353CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ACFAF7C-E459-42CC-AD3D-84978D353CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD52DBA4-C1F8-4E60-AFA9-53FEB2E18A95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD52DBA4-C1F8-4E60-AFA9-53FEB2E18A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD52DBA4-C1F8-4E60-AFA9-53FEB2E18A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD52DBA4-C1F8-4E60-AFA9-53FEB2E18A95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E34210B3-393F-4C9B-A316-EAC32D920B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E34210B3-393F-4C9B-A316-EAC32D920B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E34210B3-393F-4C9B-A316-EAC32D920B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E34210B3-393F-4C9B-A316-EAC32D920B6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D45AD4A-D61E-43EE-98BC-EEA695CA8C22} = {93C3F343-3ECF-444B-966A-956F462185C6}
+		{74E1B87B-C4F0-4B43-8378-D863D29B46C0} = {93C3F343-3ECF-444B-966A-956F462185C6}
+		{C07247C3-420D-4595-B9B9-33764183750C} = {B7800509-C11E-40BA-83FA-2C09B6F5602B}
+		{A14C0FD0-D482-41EB-BC11-ED547405872C} = {B7800509-C11E-40BA-83FA-2C09B6F5602B}
+		{A6F6F20A-3B1A-4E10-8FB9-73CEF38E914A} = {B7800509-C11E-40BA-83FA-2C09B6F5602B}
+		{3A2CBBED-8945-443C-AFAE-20FDF0A0A34F} = {93C3F343-3ECF-444B-966A-956F462185C6}
+		{DD52DBA4-C1F8-4E60-AFA9-53FEB2E18A95} = {B7800509-C11E-40BA-83FA-2C09B6F5602B}
+		{E34210B3-393F-4C9B-A316-EAC32D920B6E} = {93C3F343-3ECF-444B-966A-956F462185C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2F4205B-7D22-40E7-93DD-7266B38F61D1}

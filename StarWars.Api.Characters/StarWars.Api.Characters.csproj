@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StarWars.Api.Characters.Contracts\StarWars.Api.Characters.Contracts.csproj" />
+    <ProjectReference Include="..\StarWars.Api.Characters.Storage\StarWars.Api.Characters.Storage.csproj" />
+    <ProjectReference Include="..\StarWars.Api.Episodes\StarWars.Api.Episodes.csproj" />
+    <ProjectReference Include="..\StarWars.Api.Infrastructure.Storage\StarWars.Api.Infrastructure.Storage.csproj" />
+    <ProjectReference Include="..\StarWars.Api.SharedKernel.Contracts\StarWars.Api.SharedKernel.Contracts.csproj" />
+    <ProjectReference Include="..\StarWars.Api.SharedKernel\StarWars.Api.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>

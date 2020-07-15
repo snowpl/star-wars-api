@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StarWars.Api.SharedKernel.Contracts\StarWars.Api.SharedKernel.Contracts.csproj" />
+    <ProjectReference Include="..\StarWars.Api.SharedKernel\StarWars.Api.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>
