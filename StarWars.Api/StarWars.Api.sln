@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Characters.Sto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Episodes.Storage", "..\StarWars.Api.Episodes.Storage\StarWars.Api.Episodes.Storage.csproj", "{E34210B3-393F-4C9B-A316-EAC32D920B6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars.Api.Characters.Messaging", "..\StarWars.Api.Characters.Messaging\StarWars.Api.Characters.Messaging.csproj", "{07B0B026-15C0-4432-A4A4-FDA5D561FA6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 		{E34210B3-393F-4C9B-A316-EAC32D920B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E34210B3-393F-4C9B-A316-EAC32D920B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E34210B3-393F-4C9B-A316-EAC32D920B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07B0B026-15C0-4432-A4A4-FDA5D561FA6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07B0B026-15C0-4432-A4A4-FDA5D561FA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07B0B026-15C0-4432-A4A4-FDA5D561FA6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07B0B026-15C0-4432-A4A4-FDA5D561FA6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +119,7 @@ Global
 		{3A2CBBED-8945-443C-AFAE-20FDF0A0A34F} = {93C3F343-3ECF-444B-966A-956F462185C6}
 		{DD52DBA4-C1F8-4E60-AFA9-53FEB2E18A95} = {B7800509-C11E-40BA-83FA-2C09B6F5602B}
 		{E34210B3-393F-4C9B-A316-EAC32D920B6E} = {93C3F343-3ECF-444B-966A-956F462185C6}
+		{07B0B026-15C0-4432-A4A4-FDA5D561FA6C} = {B7800509-C11E-40BA-83FA-2C09B6F5602B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2F4205B-7D22-40E7-93DD-7266B38F61D1}

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.0.1" />
+    <PackageReference Include="NServiceBus" Version="7.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\StarWars.Api.SharedKernel.Contracts\StarWars.Api.SharedKernel.Contracts.csproj" />
   </ItemGroup>
 

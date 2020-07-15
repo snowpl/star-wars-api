@@ -1,4 +1,5 @@
 using System;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using StarWars.Api.Characters;
+using StarWars.Api.Characters.Contracts;
 using StarWars.Api.Characters.Storage;
 using StarWars.Api.Episodes;
 using StarWars.Api.Episodes.Storage;
@@ -47,6 +49,10 @@ namespace StarWars.Api
                     }
                 });
             });
+
+
+            services.AddMvc()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UpdateCharacterNameCommand>());
 
             services.AddDbContext<CharactersDbContext>(options => options.UseInMemoryDatabase(databaseName: "Characters"));
             services.AddDbContext<EpisodesDbContext>(options => options.UseInMemoryDatabase(databaseName: "Episodes"));
