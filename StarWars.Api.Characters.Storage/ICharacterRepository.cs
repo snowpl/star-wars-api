@@ -13,5 +13,6 @@ namespace StarWars.Api.Characters.Storage
         Task AddCharacter(string name, string planet);
         Task ChangeCharacterStatus(int id, StatusDBO status);
         Task AddCharacterFriend(int id, int friendId);
+        Task RemoveCharacterFriend(int id, int friendId);
     }
 }

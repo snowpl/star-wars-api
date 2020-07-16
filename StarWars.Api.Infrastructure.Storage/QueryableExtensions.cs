@@ -10,7 +10,7 @@ namespace StarWars.Api.Infrastructure.Storage
     {
         public static async Task<PageResponse<TResult>> PickPage<TResult>(this IQueryable<TResult> input, PageRequest query)
             =>  new PageResponse<TResult>(input.Skip((query.PageNumber-1) * query.PageSize).Take(query.PageSize).ToList(),
-                CreatePagingInfo(query, await input.CountAsync()));
+                CreatePagingInfo(query, input.Count()));
 
         public static async Task<PageResponse<TResult>> PickPage<TResult>(this IEnumerable<TResult> input, PageRequest query)
         {

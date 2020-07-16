@@ -61,6 +61,7 @@ namespace StarWars.Api
             services.AddTransient<ICharacterRepository, CharacterRepository>();
             services.AddTransient<IEpisodeRepository, EpisodeRepository>();
             services.AddTransient<IEpisodesService, EpisodesService>();
+            services.AddTransient<IFriendsService, FriendsService>();
 
             services.AddSingleton<IHostedService>(provider => new NServiceBusServiceHost(CreateEndpointConfiguration(provider)));
         }
@@ -78,23 +79,24 @@ namespace StarWars.Api
             //I personally don't like how the DI is working in NServiceBus.
             _endpointConfiguration.RegisterComponents(
             registration: configureComponents =>
-            {    
+            {
                 configureComponents.ConfigureComponent(componentFactory: () =>
                 {
                     var opts = provider.GetService<DbContextOptions<CharactersDbContext>>();
                     return new CharactersDbContext(opts);
-                }, DependencyLifecycle.InstancePerUnitOfWork);
+                }, DependencyLifecycle.SingleInstance);
 
                 configureComponents.ConfigureComponent(componentFactory: () =>
                 {
-                    var episodes = provider.GetService<DbContextOptions<EpisodesDbContext>>();
-                    return new EpisodesDbContext(episodes);
-                }, DependencyLifecycle.InstancePerUnitOfWork);
+                    var opts = provider.GetService<DbContextOptions<EpisodesDbContext>>();
+                    return new EpisodesDbContext(opts);
+                }, DependencyLifecycle.SingleInstance);
 
                 configureComponents.ConfigureComponent<CharacterRepository>(DependencyLifecycle.InstancePerUnitOfWork);
                 configureComponents.ConfigureComponent<EpisodesService>(DependencyLifecycle.SingleInstance);
                 configureComponents.ConfigureComponent<EpisodeRepository>(DependencyLifecycle.SingleInstance);
                 configureComponents.ConfigureComponent<CharactersService>(DependencyLifecycle.SingleInstance);
+                configureComponents.ConfigureComponent<FriendsService>(DependencyLifecycle.SingleInstance);
             });
             return _endpointConfiguration;
         }

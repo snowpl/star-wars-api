@@ -23,41 +23,34 @@ namespace StarWars.Api.Characters
             _episodesService = episodesService;
         }
 
-        public async Task UpdateCharacterName(UpdateCharacterNameCommand command)
-        {
-            await _characterRepository.UpdateCharacterName(command.Id, command.Name);
-        }
-
         public async Task<PageResponse<Character>> List(GetCharactersQuery query)
         {
-            var charactersTask = _characterRepository.GetAllCharacters()
+            var characters = await _characterRepository.GetAllCharacters()
                 .Select(x => new CharacterDTO(x.Id, x.Name, x.Planet))
                 .PickPage(query);
 
-            var episodesTask = _episodesService.GetAllEpisodes().ToListAsync();
-
-            await Task.WhenAll(charactersTask, episodesTask);
-            var characters = charactersTask.Result;
-
+            var episodes= _episodesService.GetAllEpisodes().ToList();
             var charactersIds = characters.Results.Select(x => x.Id);
 
             var episodeCharactersTask = _episodesService.GetAllEpisodesCharacters(charactersIds);
-            var friendsTasks = _characterRepository.GetAllCharactersFriends(charactersIds)
+            var friendsTasks = Task.FromResult(_characterRepository.GetAllCharactersFriends(charactersIds)
                 .Select(x => new CharacterFriendDTO(x.Id, x.FriendId))
-                .ToListAsync();
+                .ToList());
 
             await Task.WhenAll(episodeCharactersTask, friendsTasks);
 
-            return characters.ComposeCharacters(episodesTask.Result, friendsTasks.Result, episodeCharactersTask.Result);
+            return characters.ComposeCharacters(episodes, friendsTasks.Result, episodeCharactersTask.Result);
         }
+        public Task UpdateCharacterName(UpdateCharacterNameCommand command)
+            => _characterRepository.UpdateCharacterName(command.Id, command.Name);
 
-        public async Task AddCharacter(CreateCharacterCommand command)
-            => await _characterRepository.AddCharacter(command.Name, command.Planet);
+        public Task AddCharacter(CreateCharacterCommand command)
+            =>  _characterRepository.AddCharacter(command.Name, command.Planet);
 
-        public async Task DeactivateCharacter(DeactivateCharacterCommand command)
-            => await _characterRepository.ChangeCharacterStatus(command.Id, Storage.DataModels.StatusDBO.Deactivated);
+        public Task DeactivateCharacter(DeactivateCharacterCommand command)
+            => _characterRepository.ChangeCharacterStatus(command.Id, Storage.DataModels.StatusDBO.Deactivated);
 
-        public async Task ActivateCharacter(ActivateCharacterCommand command)
-            => await _characterRepository.ChangeCharacterStatus(command.Id, Storage.DataModels.StatusDBO.Active);
+        public Task ActivateCharacter(ActivateCharacterCommand command)
+            => _characterRepository.ChangeCharacterStatus(command.Id, Storage.DataModels.StatusDBO.Active);
     }
 }

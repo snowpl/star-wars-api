@@ -37,6 +37,8 @@ namespace StarWars.Api
                     transport.Routing().RouteToEndpoint(typeof(CreateCharacterCommand), "StarWars.Api.Characters.Messaging");
                     transport.Routing().RouteToEndpoint(typeof(ActivateCharacterCommand), "StarWars.Api.Characters.Messaging");
                     transport.Routing().RouteToEndpoint(typeof(DeactivateCharacterCommand), "StarWars.Api.Characters.Messaging");
+                    transport.Routing().RouteToEndpoint(typeof(AddFriendsCommand), "StarWars.Api.Characters.Messaging");
+                    transport.Routing().RouteToEndpoint(typeof(RemoveFriendCommand), "StarWars.Api.Characters.Messaging");
 
                     endpointConfiguration.SendOnly();
                     return endpointConfiguration;

@@ -2,7 +2,7 @@
 {
     public enum FriendStatusDBO
     {
-        Accepted,
-        Removed
+        Accepted = 0,
+        Removed = 1
     }
 }

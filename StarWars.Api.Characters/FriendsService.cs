@@ -1,8 +1,5 @@
-﻿using StarWars.Api.Characters.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using StarWars.Api.Characters.Contracts.Commands;
+using StarWars.Api.Characters.Storage;
 using System.Threading.Tasks;
 
 namespace StarWars.Api.Episodes
@@ -15,9 +12,10 @@ namespace StarWars.Api.Episodes
             _characterRepository = characterRepository;
         }
 
-        public Task AddFriendForCharacter(int characterId, int friendId)
-        {
-            _characterRepository.
-        }
+        public Task AddFriendForCharacter(AddFriendsCommand command) 
+            => _characterRepository.AddCharacterFriend(command.CharacterId, command.FriendId);
+
+        public Task RemoveFriendForCharacter(RemoveFriendCommand command) 
+            => _characterRepository.RemoveCharacterFriend(command.CharacterId, command.FriendId);
     }
 }

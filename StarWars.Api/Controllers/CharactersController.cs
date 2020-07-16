@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NServiceBus;
 using StarWars.Api.Characters;
 using StarWars.Api.Characters.Contracts;
+using StarWars.Api.Characters.Contracts.Commands;
 using StarWars.Api.Infrastructure;
 using StarWars.Api.SharedKernel.Contracts;
 
@@ -35,11 +36,27 @@ namespace StarWars.Api.Controllers
             return Accepted();
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("change-name", Name = "UpdateCharacterName")]
         public async Task<IActionResult> UpdateCharacterName([FromBody] UpdateCharacterNameCommand command)
         {
             await _messageSession.Send(new UpdateCharacterNameCommand() {Id = command.Id, Name = command.Name }).ConfigureAwait(false);
+            return Accepted();
+        }
+
+        [HttpPut]
+        [Route("activate", Name = "ActivateCharacterCommand")]
+        public async Task<IActionResult> ActivateCharacterCommand([FromBody] ActivateCharacterCommand command)
+        {
+            await _messageSession.Send(new ActivateCharacterCommand() { Id = command.Id, }).ConfigureAwait(false);
+            return Accepted();
+        }
+
+        [HttpDelete]
+        [Route("deactivate", Name = "DeactivateCharacterCommand")]
+        public async Task<IActionResult> DeactivateCharacterCommand([FromBody] DeactivateCharacterCommand command)
+        {
+            await _messageSession.Send(new DeactivateCharacterCommand() { Id = command.Id }).ConfigureAwait(false);
             return Accepted();
         }
     }

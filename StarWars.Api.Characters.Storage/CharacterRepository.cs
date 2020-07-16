@@ -24,16 +24,17 @@ namespace StarWars.Api.Characters.Storage
         public IQueryable<CharacterFriendDBO> GetAllCharactersFriends(IEnumerable<int> charactersIds)
         {
             return _dbContext.Friends
+                .Where(x => x.FriendStatus == FriendStatusDBO.Accepted)
                 .Where(x => charactersIds.Contains(x.Id));
         }
 
         public async Task ChangeCharacterStatus(int id, StatusDBO status)
         {
-            var character = _dbContext.Characters.Find(id);
-            
-            if(character != null)
+            var character = _dbContext.Characters.FirstOrDefault(x => x.Id == id);
+
+            if (character != null)
             {
-                if(character.Status != status)
+                if (character.Status != status)
                 {
                     character.Status = status;
                     await _dbContext.SaveChangesAsync();
@@ -43,7 +44,7 @@ namespace StarWars.Api.Characters.Storage
 
         public async Task AddCharacter(string name, string planet)
         {
-            lock(_dbContext.Characters)
+            lock (_dbContext.Characters)
             {
                 var maxId = _dbContext.Characters.Max(x => x.Id);
                 {
@@ -55,8 +56,8 @@ namespace StarWars.Api.Characters.Storage
 
         public async Task UpdateCharacterName(int id, string name)
         {
-            var character = _dbContext.Characters.Find(id);
-            if(character != null)
+            var character = _dbContext.Characters.FirstOrDefault(x => x.Id == id);
+            if (character != null)
             {
                 character.Name = name;
                 await _dbContext.SaveChangesAsync();
@@ -65,9 +66,16 @@ namespace StarWars.Api.Characters.Storage
 
         public async Task AddCharacterFriend(int id, int friendId)
         {
-            if(BothCharactersExists(id, friendId))
+            if (BothCharactersExists(id, friendId))
             {
-                _dbContext.Friends.Add(new CharacterFriendDBO(id, friendId));
+                if (TryGetFriends(id, friendId, out var friends))
+                {
+                    friends.FriendStatus = FriendStatusDBO.Accepted;
+                }
+                else
+                {
+                    _dbContext.Friends.Add(new CharacterFriendDBO(id, friendId));
+                }
                 await _dbContext.SaveChangesAsync();
             }
         }
@@ -76,14 +84,25 @@ namespace StarWars.Api.Characters.Storage
         {
             if (BothCharactersExists(id, friendId))
             {
-                _dbContext.Friends.Add(new CharacterFriendDBO(id, friendId));
-                await _dbContext.SaveChangesAsync();
+                if (TryGetFriends(id, friendId, out var friends))
+                {
+                    friends.FriendStatus = FriendStatusDBO.Removed;
+                    await _dbContext.SaveChangesAsync();
+                }
             }
         }
 
+        private bool TryGetFriends(int id, int friendId, out CharacterFriendDBO friends)
+        {
+            friends = _dbContext.Friends.SingleOrDefault(x =>
+                    (x.Id == id && x.FriendId == friendId)
+                    || (x.FriendId == id && x.Id == friendId));
+            return friends != null;
+        }
+
         private bool BothCharactersExists(int id, int friendId)
-            => _dbContext.Characters.Find(id) != null
-                && _dbContext.Characters.Find(friendId) != null;
+            => _dbContext.Characters.FirstOrDefault(x => x.Id == id) != null
+                && _dbContext.Characters.FirstOrDefault(x => x.Id == friendId) != null;
 
     }
 }

@@ -7,7 +7,7 @@ namespace StarWars.Api.Characters.Storage
         public int Id { get; set; }
         public int FriendId { get; set; }
         public FriendStatusDBO FriendStatus { get; set; }
-
+        public CharacterFriendDBO(){ }
         public CharacterFriendDBO(int id, int friendId, FriendStatusDBO status = FriendStatusDBO.Accepted)
         {
             Id = id;

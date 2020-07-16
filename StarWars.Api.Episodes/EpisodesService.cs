@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StarWars.Api.Characters.Storage;
+using StarWars.Api.Episodes.Contracts;
 using StarWars.Api.Episodes.Models;
 using StarWars.Api.Episodes.Storage;
 using System;
@@ -11,9 +13,12 @@ namespace StarWars.Api.Episodes
     public class EpisodesService : IEpisodesService
     {
         private readonly IEpisodeRepository _episodeRepository;
-        public EpisodesService(IEpisodeRepository episodeRepository)
+        private readonly ICharacterRepository _characterRepository;
+        public EpisodesService(IEpisodeRepository episodeRepository,
+                                ICharacterRepository characterRepository)
         {
             _episodeRepository = episodeRepository;
+            _characterRepository = characterRepository;
         }
 
         public async Task<IEnumerable<EpisodeCharacterDTO>> GetAllEpisodesCharacters(IEnumerable<int> characterIds)
@@ -37,6 +42,18 @@ namespace StarWars.Api.Episodes
                 .Select(x => new EpisodeDTO(x.Id, x.Name))
                 .ToListAsync()
                 .ConfigureAwait(false);
+        }
+
+        public async Task<EpisodeCharacters> GetEpisodeCharacters(int episodeId)
+        {
+            var episode = await _episodeRepository.GetEpisode(episodeId);
+            if(episode == null)
+            {
+                throw new KeyNotFoundException($"The episode with ${episodeId} does not exists");
+            }
+            var episodeCharacters = _episodeRepository.GetEpisodesCharacters(episodeId).ToList();
+            var characters = _characterRepository.GetAllCharacters().Where(x => episodeCharacters.Select(a => a.CharacterId).Contains(x.Id));
+            return new EpisodeCharacters(episodeId, episode.Name, characters.Select(character => character.Name));
         }
     }
 }

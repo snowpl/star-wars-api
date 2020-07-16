@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StarWars.Api.Episodes.Storage
 {
@@ -19,5 +21,11 @@ namespace StarWars.Api.Episodes.Storage
         {
             return _dbContext.EpisodeCharacters.AsQueryable();
         }
+
+        public async Task<EpisodeDBO> GetEpisode(int episodeId) 
+            => await _dbContext.Episodes.FirstOrDefaultAsync(x => x.Id == episodeId);
+
+        public IQueryable<EpisodeCharacterDBO> GetEpisodesCharacters(int episodeId)
+            => _dbContext.EpisodeCharacters.Where(x => x.EpiosdeId == episodeId);
     }
 }

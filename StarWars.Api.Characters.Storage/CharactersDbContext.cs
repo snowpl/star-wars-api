@@ -14,6 +14,10 @@ namespace StarWars.Api.Characters.Storage
         {
             modelBuilder.Entity<CharacterFriendDBO>()
                 .HasKey(c => new { c.Id, c.FriendId });
+
+            modelBuilder.Entity<CharacterFriendDBO>()
+                .Property(x => x.FriendStatus)
+                .HasConversion(typeof(short));
         }
     }
 }
