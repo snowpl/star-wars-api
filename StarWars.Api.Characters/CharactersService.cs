@@ -22,6 +22,11 @@ namespace StarWars.Api.Characters
             _episodesService = episodesService;
         }
 
+        public async Task UpdateCharacterName(UpdateCharacterNameCommand command)
+        {
+            await _characterRepository.UpdateCharacterName(command.Id, command.Name);
+        }
+
         public async Task<PageResponse<Character>> List(GetCharactersQuery query)
         {
             var charactersTask = _characterRepository.GetAllCharacters()
@@ -44,5 +49,16 @@ namespace StarWars.Api.Characters
 
             return characters.ComposeCharacters(episodesTask.Result, friendsTasks.Result, episodeCharactersTask.Result);
         }
+
+        public async Task AddCharacter(CreateCharacterCommand command)
+        {
+            await _characterRepository.AddCharacter(command.Name, command.Planet);
+        }
+
+        public async Task DeactivateCharacter(int id)
+            => await _characterRepository.ChangeCharacterStatus(id, Storage.DataModels.StatusDBO.Deactivated);
+
+        public async Task ActivateCharacter(int id)
+            => await _characterRepository.ChangeCharacterStatus(id, Storage.DataModels.StatusDBO.Active);
     }
 }

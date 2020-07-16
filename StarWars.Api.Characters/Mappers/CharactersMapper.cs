@@ -1,5 +1,6 @@
 ﻿using StarWars.Api.Characters.Contracts;
 using StarWars.Api.Characters.Models;
+using StarWars.Api.Characters.Storage.DataModels;
 using StarWars.Api.Episodes.Models;
 using StarWars.Api.Infrastructure;
 using System;

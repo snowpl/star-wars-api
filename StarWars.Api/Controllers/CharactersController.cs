@@ -4,6 +4,7 @@ using NServiceBus;
 using StarWars.Api.Characters;
 using StarWars.Api.Characters.Contracts;
 using StarWars.Api.Infrastructure;
+using StarWars.Api.SharedKernel.Contracts;
 
 namespace StarWars.Api.Controllers
 {
@@ -22,13 +23,21 @@ namespace StarWars.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<PageResponse<Character>> Get([FromQuery] GetCharactersQuery query)
+        public async Task<PageResponse<Character>> Get([FromQuery] PageRequest query)
         {
-            return await _charactersService.List(query);
+            return await _charactersService.List(new GetCharactersQuery(query.PageSize, query.PageNumber));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody] UpdateCharacterNameCommand command)
+        public async Task<IActionResult> Add([FromBody] CreateCharacterCommand command)
+        {
+            await _messageSession.Send(new CreateCharacterCommand() { Planet = command.Planet, Name = command.Name }).ConfigureAwait(false);
+            return Accepted();
+        }
+
+        [HttpPost]
+        [Route("change-name", Name = "UpdateCharacterName")]
+        public async Task<IActionResult> UpdateCharacterName([FromBody] UpdateCharacterNameCommand command)
         {
             await _messageSession.Send(new UpdateCharacterNameCommand() {Id = command.Id, Name = command.Name }).ConfigureAwait(false);
             return Accepted();

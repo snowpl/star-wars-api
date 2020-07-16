@@ -33,6 +33,7 @@ namespace StarWars.Api
                     transport.StorageDirectory("..\\.learningtransport");
 
                     transport.Routing().RouteToEndpoint(typeof(UpdateCharacterNameCommand), "StarWars.Api.Characters.Messaging");
+                    transport.Routing().RouteToEndpoint(typeof(CreateCharacterCommand), "StarWars.Api.Characters.Messaging");
 
                     endpointConfiguration.SendOnly();
                     return endpointConfiguration;
