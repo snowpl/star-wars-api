@@ -3,10 +3,6 @@ using NServiceBus;
 
 namespace StarWars.Api.Characters.Contracts
 {
-    public class MyMessage : ICommand
-    {
-
-    }
 
     public class UpdateCharacterNameCommand : IMessage
     {

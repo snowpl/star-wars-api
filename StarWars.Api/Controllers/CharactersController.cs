@@ -30,8 +30,6 @@ namespace StarWars.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Update([FromBody] UpdateCharacterNameCommand command)
         {
-            var message = new MyMessage();
-            await _messageSession.Send(message).ConfigureAwait(false);
             await _messageSession.Send(new UpdateCharacterNameCommand() {Id = command.Id, Name = command.Name }).ConfigureAwait(false);
             return Accepted();
         }

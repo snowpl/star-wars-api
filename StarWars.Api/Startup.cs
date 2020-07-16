@@ -1,12 +1,17 @@
 using System;
+using System.ComponentModel.Design;
+using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NServiceBus;
+using StarWars.Api.BackgroundService;
 using StarWars.Api.Characters;
 using StarWars.Api.Characters.Contracts;
 using StarWars.Api.Characters.Storage;
@@ -24,7 +29,6 @@ namespace StarWars.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -54,15 +58,50 @@ namespace StarWars.Api
             services.AddMvc()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UpdateCharacterNameCommand>());
 
-            services.AddDbContext<CharactersDbContext>(options => options.UseInMemoryDatabase(databaseName: "Characters"));
-            services.AddDbContext<EpisodesDbContext>(options => options.UseInMemoryDatabase(databaseName: "Episodes"));
+            services.AddDbContextPool<CharactersDbContext>(options => options.UseInMemoryDatabase(databaseName: "Characters"));
+            services.AddDbContextPool<EpisodesDbContext>(options => options.UseInMemoryDatabase(databaseName: "Episodes"));
             services.AddTransient<ICharactersService, CharactersService>();
             services.AddTransient<ICharacterRepository, CharacterRepository>();
             services.AddTransient<IEpisodeRepository, EpisodeRepository>();
             services.AddTransient<IEpisodesService, EpisodesService>();
+
+            services.AddSingleton<IHostedService>(provider => new NServiceBusServiceHost(CreateEndpointConfiguration(provider)));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        private EndpointConfiguration CreateEndpointConfiguration(IServiceProvider provider)
+        {
+            var _endpointConfiguration = new EndpointConfiguration("StarWars.Api.Characters.Messaging");
+            var transport = _endpointConfiguration.UseTransport<LearningTransport>();
+            _endpointConfiguration.UsePersistence<LearningPersistence>();
+
+            //Due to usage of LearningTransport it is needed to specify path for learningtransport folder.
+            transport.StorageDirectory("..\\.learningtransport");
+
+            //This registration is needed to work with background task and DI.
+            //I personally don't like how the DI is working in NServiceBus.
+            _endpointConfiguration.RegisterComponents(
+            registration: configureComponents =>
+            {    
+                configureComponents.ConfigureComponent(componentFactory: () =>
+                {
+                    var opts = provider.GetService<DbContextOptions<CharactersDbContext>>();
+                    return new CharactersDbContext(opts);
+                }, DependencyLifecycle.InstancePerUnitOfWork);
+
+                configureComponents.ConfigureComponent(componentFactory: () =>
+                {
+                    var episodes = provider.GetService<DbContextOptions<EpisodesDbContext>>();
+                    return new EpisodesDbContext(episodes);
+                }, DependencyLifecycle.InstancePerUnitOfWork);
+
+                configureComponents.ConfigureComponent<CharacterRepository>(DependencyLifecycle.InstancePerUnitOfWork);
+                configureComponents.ConfigureComponent<EpisodesService>(DependencyLifecycle.SingleInstance);
+                configureComponents.ConfigureComponent<EpisodeRepository>(DependencyLifecycle.SingleInstance);
+                configureComponents.ConfigureComponent<CharactersService>(DependencyLifecycle.SingleInstance);
+            });
+            return _endpointConfiguration;
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwagger();
