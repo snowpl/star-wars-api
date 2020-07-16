@@ -4,7 +4,6 @@ using StarWars.Api.Characters.Contracts;
 using StarWars.Api.Characters.Storage;
 using StarWars.Api.Episodes;
 using StarWars.Api.Episodes.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
