@@ -1,4 +1,5 @@
 ﻿using StarWars.Api.Characters.Contracts;
+using StarWars.Api.Characters.Contracts.Commands;
 using StarWars.Api.Infrastructure;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace StarWars.Api.Characters
         Task<PageResponse<Character>> List(GetCharactersQuery query);
         Task UpdateCharacterName(UpdateCharacterNameCommand command);
         Task AddCharacter(CreateCharacterCommand command);
-        Task ActivateCharacter(int id);
-        Task DeactivateCharacter(int id);
+        Task ActivateCharacter(ActivateCharacterCommand command);
+        Task DeactivateCharacter(DeactivateCharacterCommand command);
     }
 }

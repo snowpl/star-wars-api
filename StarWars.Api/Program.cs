@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NServiceBus;
 using StarWars.Api.Characters.Contracts;
+using StarWars.Api.Characters.Contracts.Commands;
 
 namespace StarWars.Api
 {
@@ -34,6 +35,8 @@ namespace StarWars.Api
 
                     transport.Routing().RouteToEndpoint(typeof(UpdateCharacterNameCommand), "StarWars.Api.Characters.Messaging");
                     transport.Routing().RouteToEndpoint(typeof(CreateCharacterCommand), "StarWars.Api.Characters.Messaging");
+                    transport.Routing().RouteToEndpoint(typeof(ActivateCharacterCommand), "StarWars.Api.Characters.Messaging");
+                    transport.Routing().RouteToEndpoint(typeof(DeactivateCharacterCommand), "StarWars.Api.Characters.Messaging");
 
                     endpointConfiguration.SendOnly();
                     return endpointConfiguration;

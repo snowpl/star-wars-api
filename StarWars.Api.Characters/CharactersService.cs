@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StarWars.Api.Characters.Contracts;
+using StarWars.Api.Characters.Contracts.Commands;
 using StarWars.Api.Characters.Mappers;
 using StarWars.Api.Characters.Models;
 using StarWars.Api.Characters.Storage;
@@ -51,14 +52,12 @@ namespace StarWars.Api.Characters
         }
 
         public async Task AddCharacter(CreateCharacterCommand command)
-        {
-            await _characterRepository.AddCharacter(command.Name, command.Planet);
-        }
+            => await _characterRepository.AddCharacter(command.Name, command.Planet);
 
-        public async Task DeactivateCharacter(int id)
-            => await _characterRepository.ChangeCharacterStatus(id, Storage.DataModels.StatusDBO.Deactivated);
+        public async Task DeactivateCharacter(DeactivateCharacterCommand command)
+            => await _characterRepository.ChangeCharacterStatus(command.Id, Storage.DataModels.StatusDBO.Deactivated);
 
-        public async Task ActivateCharacter(int id)
-            => await _characterRepository.ChangeCharacterStatus(id, Storage.DataModels.StatusDBO.Active);
+        public async Task ActivateCharacter(ActivateCharacterCommand command)
+            => await _characterRepository.ChangeCharacterStatus(command.Id, Storage.DataModels.StatusDBO.Active);
     }
 }
