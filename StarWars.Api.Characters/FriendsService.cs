@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StarWars.Api.Characters.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,15 @@ namespace StarWars.Api.Episodes
 {
     public class FriendsService : IFriendsService
     {
-        public Task<IGrouping<int, IEnumerable<int>>> GetAllFriendsRelations()
+        private readonly ICharacterRepository _characterRepository;
+        public FriendsService(ICharacterRepository characterRepository)
         {
-            throw new NotImplementedException();
+            _characterRepository = characterRepository;
         }
 
-        public Task<IEnumerable<int>> GetFriendsForCharacter(int id)
+        public Task AddFriendForCharacter(int characterId, int friendId)
         {
-            throw new NotImplementedException();
+            _characterRepository.
         }
     }
 }

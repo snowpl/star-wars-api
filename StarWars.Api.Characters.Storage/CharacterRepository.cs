@@ -1,8 +1,7 @@
 ﻿using StarWars.Api.Characters.Storage.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace StarWars.Api.Characters.Storage
@@ -18,7 +17,7 @@ namespace StarWars.Api.Characters.Storage
         public IQueryable<CharacterDBO> GetAllCharacters()
         {
             return _dbContext.Characters
-                .Where(x => x.Status == DataModels.StatusDBO.Active)
+                .Where(x => x.Status == StatusDBO.Active)
                 .AsQueryable();
         }
 
@@ -63,5 +62,28 @@ namespace StarWars.Api.Characters.Storage
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task AddCharacterFriend(int id, int friendId)
+        {
+            if(BothCharactersExists(id, friendId))
+            {
+                _dbContext.Friends.Add(new CharacterFriendDBO(id, friendId));
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task RemoveCharacterFriend(int id, int friendId)
+        {
+            if (BothCharactersExists(id, friendId))
+            {
+                _dbContext.Friends.Add(new CharacterFriendDBO(id, friendId));
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        private bool BothCharactersExists(int id, int friendId)
+            => _dbContext.Characters.Find(id) != null
+                && _dbContext.Characters.Find(friendId) != null;
+
     }
 }
