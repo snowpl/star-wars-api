@@ -3,9 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using StarWars.Api.Characters.Storage;
 using StarWars.Api.Episodes.Storage;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CharacterDBO = StarWars.Api.Characters.Storage.CharacterDBO;
 
 namespace StarWars.Api

@@ -2,8 +2,8 @@
 {
     public class CharacterFriendDTO
     {
-        public int Id { get; set; }
-        public int FriendId { get; set; }
+        public int Id { get; }
+        public int FriendId { get; }
         public CharacterFriendDTO(int id, int friendId)
         {
             Id = id;

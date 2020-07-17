@@ -36,7 +36,7 @@ namespace StarWars.Api.Characters.Storage
             {
                 if (character.Status != status)
                 {
-                    character.Status = status;
+                    character.SetStatus(status);
                     await _dbContext.SaveChangesAsync();
                 }
             }
@@ -59,7 +59,7 @@ namespace StarWars.Api.Characters.Storage
             var character = _dbContext.Characters.FirstOrDefault(x => x.Id == id);
             if (character != null)
             {
-                character.Name = name;
+                character.ChangeName(name);
                 await _dbContext.SaveChangesAsync();
             }
         }
@@ -70,7 +70,7 @@ namespace StarWars.Api.Characters.Storage
             {
                 if (TryGetFriends(id, friendId, out var friends))
                 {
-                    friends.FriendStatus = FriendStatusDBO.Accepted;
+                    friends.SetStatus(FriendStatusDBO.Accepted);
                 }
                 else
                 {
@@ -86,7 +86,7 @@ namespace StarWars.Api.Characters.Storage
             {
                 if (TryGetFriends(id, friendId, out var friends))
                 {
-                    friends.FriendStatus = FriendStatusDBO.Removed;
+                    friends.SetStatus(FriendStatusDBO.Removed);
                     await _dbContext.SaveChangesAsync();
                 }
             }

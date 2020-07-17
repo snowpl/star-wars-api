@@ -32,7 +32,7 @@ namespace StarWars.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateCharacterCommand command)
         {
-            await _messageSession.Send(new CreateCharacterCommand() { Planet = command.Planet, Name = command.Name }).ConfigureAwait(false);
+            await _messageSession.Send(command).ConfigureAwait(false);
             return Accepted();
         }
 
@@ -40,7 +40,7 @@ namespace StarWars.Api.Controllers
         [Route("change-name", Name = "UpdateCharacterName")]
         public async Task<IActionResult> UpdateCharacterName([FromBody] UpdateCharacterNameCommand command)
         {
-            await _messageSession.Send(new UpdateCharacterNameCommand() {Id = command.Id, Name = command.Name }).ConfigureAwait(false);
+            await _messageSession.Send(command).ConfigureAwait(false);
             return Accepted();
         }
 
@@ -48,7 +48,7 @@ namespace StarWars.Api.Controllers
         [Route("activate", Name = "ActivateCharacterCommand")]
         public async Task<IActionResult> ActivateCharacterCommand([FromBody] ActivateCharacterCommand command)
         {
-            await _messageSession.Send(new ActivateCharacterCommand() { Id = command.Id, }).ConfigureAwait(false);
+            await _messageSession.Send(command).ConfigureAwait(false);
             return Accepted();
         }
 
@@ -56,7 +56,7 @@ namespace StarWars.Api.Controllers
         [Route("deactivate", Name = "DeactivateCharacterCommand")]
         public async Task<IActionResult> DeactivateCharacterCommand([FromBody] DeactivateCharacterCommand command)
         {
-            await _messageSession.Send(new DeactivateCharacterCommand() { Id = command.Id }).ConfigureAwait(false);
+            await _messageSession.Send(command).ConfigureAwait(false);
             return Accepted();
         }
     }

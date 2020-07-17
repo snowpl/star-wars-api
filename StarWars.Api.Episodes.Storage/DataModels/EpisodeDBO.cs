@@ -2,8 +2,8 @@
 {
     public class EpisodeDBO
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int Id { get; }
+        public string Name { get; }
         public EpisodeDBO(int id, string name)
         {
             Id = id;
