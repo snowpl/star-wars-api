@@ -6,8 +6,14 @@ namespace StarWars.Api.Characters.Contracts
 
     public class UpdateCharacterNameCommand : IMessage
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int Id { get; }
+        public string Name { get; }
+
+        public UpdateCharacterNameCommand(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 
     public class UpdateCharacterNameCommandValidator : AbstractValidator<UpdateCharacterNameCommand>
