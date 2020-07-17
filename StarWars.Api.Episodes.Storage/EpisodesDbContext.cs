@@ -12,6 +12,9 @@ namespace StarWars.Api.Episodes.Storage
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<EpisodeDBO>()
+                .HasKey(c => c.Id);
+
             modelBuilder.Entity<EpisodeCharacterDBO>()
                 .HasKey(c => new { c.CharacterId, c.EpiosdeId });
         }

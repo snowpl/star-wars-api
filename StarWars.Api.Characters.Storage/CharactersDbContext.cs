@@ -12,6 +12,9 @@ namespace StarWars.Api.Characters.Storage
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CharacterDBO>()
+                .HasKey(c => c.Id);
+
             modelBuilder.Entity<CharacterFriendDBO>()
                 .HasKey(c => new { c.Id, c.FriendId });
 
