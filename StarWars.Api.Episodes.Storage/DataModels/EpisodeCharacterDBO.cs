@@ -2,9 +2,8 @@
 {
     public class EpisodeCharacterDBO
     {
-        public int EpiosdeId { get; }
-        public int CharacterId { get; }
-        public EpisodeCharacterDBO() { }
+        public int EpiosdeId { get; private set; }
+        public int CharacterId { get; private set; }
         public EpisodeCharacterDBO(int epiosdeId, int characterId)
         {
             EpiosdeId = epiosdeId;
